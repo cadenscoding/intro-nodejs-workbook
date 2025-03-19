@@ -1,0 +1,15 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "💎 Birthstone Finder Challenge 📌 Introduction In this exercise, you'll create a Node.js app that determines the birthstone for a month inputted by the user. Your app should read birthstone data from a data.json file.",
+  "main": "birthstone-finder.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

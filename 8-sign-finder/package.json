@@ -1,0 +1,16 @@
+{
+  "name": "8-sign-finder",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "📌 Introduction In this exercise, you'll create a Node.js app that determines the astrological and zodiac signs for the user based on their birthday.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "horoscope": "^2.0.1"
+  }
+}
