@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Spaghetti with Red Sauce",
+    "cookingMethod": "stove-top boil",
+    "ingredients": [
+      "spaghetti",
+      "tomato sauce",
+      "tomato paste",
+      "ground beef",
+      "salt",
+      "pepper",
+      "garlic",
+      "onion",
+      "parmesan cheese"
+    ]
+  },
+  {
+    "name": "Fried Chicken",
+    "cookingMethod": "deep fry",
+    "ingredients": ["chicken", "flour", "salt", "pepper", "garlic", "oil"]
+  },
+  {
+    "name": "Baked Chicken",
+    "cookingMethod": "oven bake",
+    "ingredients": ["chicken", "salt", "pepper", "garlic", "oil"]
+  }
+]
