@@ -1,6 +1,6 @@
 
-const express = require("express"); 
-const fs = require("fs/promises"); 
+import express from "express"; 
+import fs from "fs/promises";
 
 
 const app = express();
@@ -81,7 +81,7 @@ app.get("/update-recipe/:id", async (req, res) => {
 
 async function readRecipes() {
   try {
-    const data = await fs.readFile("./data/recipe-data.json", "utf8"); 
+    const data = await fs.readFile("../data/recipe-data.json", "utf8"); 
     return JSON.parse(data); 
   } catch (error) {
     console.error("Error reading file:", error); 
