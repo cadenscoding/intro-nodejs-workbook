@@ -1,70 +1,68 @@
-const express = require("express");
-const fs = require("fs").promises;
+import express from "express";
+import fs from "fs/promises"; 
 
 const app = express();
-const port = 3001;
-
-app.use(express.json());
+const port = 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
 
-const asyncHandler = (fn) => (req, res, next) => {
-  fn(req, res, next).catch((error) => {
-    res.status(500).send("Server Error: " + error.message);
-  });
-};
-
-
-app.get("/recipes", asyncHandler(async (req, res) => {
+app.get("/find-recipes", async (req, res) => {
   const recipes = await readRecipes();
   res.json(recipes);
-}));
+});
 
 
-app.get("/recipe/:id", asyncHandler(async (req, res) => {
+app.get("/find-recipe/:id", async (req, res) => {
   const recipes = await readRecipes();
-  const recipe = recipes[req.params.id];
-  if (recipe) {
-    res.json(recipe);
+  const id = parseInt(req.params.id);
+  if (recipes[id]) {
+    res.json(recipes[id]);
   } else {
     res.status(404).send("Recipe not found.");
   }
-}));
+});
 
 
-app.delete("/recipe/:id", asyncHandler(async (req, res) => {
+app.get("/delete-recipe/:id", async (req, res) => {
   const recipes = await readRecipes();
-  if (recipes[req.params.id]) {
-    recipes.splice(req.params.id, 1);
+  const id = parseInt(req.params.id);
+  if (recipes[id]) {
+    recipes.splice(id, 1); 
     await saveRecipes(recipes);
     res.send("Recipe deleted.");
   } else {
     res.status(404).send("Recipe not found.");
   }
-}));
+});
 
-
-app.put("/recipe/:id", asyncHandler(async (req, res) => {
+app.get("/update-recipe/:id", async (req, res) => {
   const recipes = await readRecipes();
-  if (recipes[req.params.id]) {
-    recipes[req.params.id].name = req.body.name;
+  const id = parseInt(req.params.id);
+  const newName = req.query.newName;
+
+  if (!newName) {
+    return res.status(400).send("New name is required.");
+  }
+
+  if (recipes[id]) {
+    recipes[id].name = newName; 
     await saveRecipes(recipes);
-    res.send("Recipe updated.");
+    res.send("Recipe name updated.");
   } else {
     res.status(404).send("Recipe not found.");
   }
-}));
+});
 
 
 async function readRecipes() {
-  const data = await fs.readFile("../data/recipe-data.json", "utf8");
-  return JSON.parse(data);
+  try {
+    const data = await fs.readFile("./data/recipe-data.json", "utf8");
+    return JSON.parse(data);
+  } catch (error) {
+    return []; 
+  }
 }
 
-
-async function saveRecipes(recipes) {
-  await fs.writeFile("../data/recipe-data.json", JSON.stringify(recipes), "utf8");
-}
