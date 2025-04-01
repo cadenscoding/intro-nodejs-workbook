@@ -94,6 +94,6 @@ async function saveRecipes(recipes) {
   try {
     await fs.writeFile("./data/recipe-data.json", JSON.stringify(recipes, null, 2)); 
   } catch (error) {
-    console.error("Error saving file:", error); /
+    console.error("Error saving file:", error); 
   }
 }
